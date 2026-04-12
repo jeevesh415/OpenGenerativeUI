@@ -308,6 +308,12 @@ body, html {
 
 @media (max-width: 768px) {
   .brand-shell { padding: 8px; }
+  .brand-glass-container { border-radius: var(--radius-lg); }
+}
+
+@media (max-width: 480px) {
+  .brand-shell { padding: 4px; }
+  .brand-glass-container { border-radius: var(--radius-md); }
 }
 
 /* === Gradient Utilities === */
@@ -602,6 +608,50 @@ body, html {
   flex-shrink: 0;
 }
 
+/* === Demo Gallery Drawer === */
+/* Mobile: full-screen, slides up from bottom */
+.demo-gallery-drawer {
+  inset: 0;
+  border-radius: 0;
+  transform: translateY(100%);
+}
+.demo-gallery-drawer--open {
+  transform: translateY(0);
+}
+
+/* Desktop (sm+): right side panel, slides in from right */
+@media (min-width: 640px) {
+  .demo-gallery-drawer {
+    inset: auto;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 480px;
+    max-width: 90vw;
+    border-left: 1px solid var(--color-border-glass, rgba(0,0,0,0.1));
+    transform: translateX(100%);
+  }
+  .demo-gallery-drawer--open {
+    transform: translateX(0);
+    box-shadow: -8px 0 30px rgba(0,0,0,0.1);
+  }
+}
+
+/* === Demo Gallery Dark Mode Readability Fix === */
+:root.dark .demo-gallery-drawer {
+  background: var(--color-surface) !important;
+}
+
+:root.dark .demo-gallery-drawer .demo-gallery-card {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+:root.dark .demo-gallery-drawer .demo-gallery-chip {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
 /* === Flash Animation === */
 .content-flash {
   animation: content-flash 700ms ease-out;
@@ -620,4 +670,30 @@ body, html {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* Template save animations */
+@keyframes tmpl-pop {
+  0%   { transform: scale(0.8); opacity: 0; }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes tmpl-check {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes tmpl-slideIn {
+  from { transform: translateY(-4px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes chipIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
